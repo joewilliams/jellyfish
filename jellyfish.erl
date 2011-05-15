@@ -21,9 +21,12 @@ handle_r(_, _, Req) ->
 
 handle_websocket(Ws) ->
     receive
+        {event} ->
+            Ws:send("event"),
+            handle_websocket(Ws);
         _Ignore ->
             handle_websocket(Ws)
     after 5000 ->
-            Ws:send(pid_to_list(self())),
+            Ws:send([Ws:get(path), pid_to_list(self())]),
             handle_websocket(Ws)
     end.
