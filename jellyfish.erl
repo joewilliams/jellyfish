@@ -2,11 +2,13 @@
 -export([start/1, stop/0]).
 
 start(Port) ->
+    ets:new(map, [public,named_table,bag]),
     misultin:start_link([{port, Port},
                          {loop, fun(Req) -> route_rest(Req) end},
                          {ws_loop, fun(Ws) -> handle_websocket(Ws) end}]).
 
-stop() -> misultin:stop().
+stop() -> ets:delete(map),
+          misultin:stop().
 
 route_rest(Req) ->
     handle_r(Req:get(method), Req:resource([lowercase, urldecode]), Req).
@@ -21,12 +23,12 @@ handle_r(_, _, Req) ->
 
 handle_websocket(Ws) ->
     receive
+        {browser, Data} ->
+            ets:insert(map, { Ws:get(path), self() }),
+            handle_websocket(Ws);
         {event} ->
             Ws:send("event"),
             handle_websocket(Ws);
         _Ignore ->
-            handle_websocket(Ws)
-    after 5000 ->
-            Ws:send([Ws:get(path), pid_to_list(self())]),
             handle_websocket(Ws)
     end.
