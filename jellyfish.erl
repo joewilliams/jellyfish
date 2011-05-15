@@ -24,6 +24,6 @@ handle_websocket(Ws) ->
         _Ignore ->
             handle_websocket(Ws)
     after 5000 ->
-            Ws:send(Ws:get(path)),
+            Ws:send(pid_to_list(self())),
             handle_websocket(Ws)
     end.
