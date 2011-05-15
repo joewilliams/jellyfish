@@ -2,7 +2,7 @@
 -export([start/1, stop/0]).
 
 start(Port) ->
-    ets:new(map, [public,named_table,bag]),
+    ets:new(clients, [public,named_table,bag]),
     misultin:start_link([{port, Port},
                          {loop, fun(Req) -> route_rest(Req) end},
                          {ws_loop, fun(Ws) -> handle_websocket(Ws) end}]).
@@ -27,7 +27,7 @@ handle_r(_, _, Req) ->
 handle_websocket(Ws) ->
     receive
         {browser, Data} ->
-            ets:insert(map, { Ws:get(path), self() }),
+            ets:insert(clients, { Ws:get(path), self() }),
             handle_websocket(Ws);
         {event} ->
             Ws:send("event"),
