@@ -16,7 +16,7 @@ GitHub -(webhook) ->
 1. POSTing to http://jlyfsh.com/deploy generates a unique URI
 2. On hosts deploying your code install the jellyfish daemon
 3. Configure jellyfish.yml and start jellyfish-client.py so it has a
-persistent WebSockets connection to your unique URI
+   persistent WebSockets connection to your unique URI
 4. GET or POST to http://jlyfsh.com/deploy/{id} to signal a deploy
 
 ## Installation
@@ -29,7 +29,8 @@ persistent WebSockets connection to your unique URI
 
 ## To Do
 
-* Package Erlang and Python programs using native techniques.
+* Learn how to package, install and demonize Erlang and Python
+  programs using native techniques
 
 ## Caveat emptor
 
