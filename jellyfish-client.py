@@ -1,9 +1,12 @@
 import websocket
 import yaml
+import daemon
 from subprocess import call
 
+conf = yaml.load(file("/etc/jellyfish.yml", "r"))
+
 def on_message(ws, message):
-    call(["uptime"])
+    call(conf["command"])
 
 def on_error(ws, error):
     print error
@@ -14,12 +17,11 @@ def on_close(ws):
 def on_open(ws):
     ws.send("open")
 
-def conf:
-    yaml.load(file("/etc/jellyfish.yml", "r"))
-
-if __name__ == "__main__":
+with daemon.DaemonContext():
     websocket.enableTrace(False)
-    ws = websocket.WebSocketApp("ws://localhost:8080/deploy/" + uuid,
+    ws = websocket.WebSocketApp(("ws://" +
+                                 conf["endpoint"] + "/" +
+                                 conf["id"]),
                                 on_message = on_message,
                                 on_error = on_error,
                                 on_close = on_close)
