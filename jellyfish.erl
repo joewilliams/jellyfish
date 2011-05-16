@@ -28,7 +28,7 @@ handle_r(_, _, Req) ->
 handle_websocket(Ws) ->
     receive
         {browser, Data} ->
-            ets:insert(clients, {last_token(Ws:get(path)),
+            ets:insert(clients, {util:last_token(Ws:get(path)),
                                  self()}),
             handle_websocket(Ws);
         {event} ->
@@ -41,6 +41,3 @@ handle_websocket(Ws) ->
 signal(Id) ->
     [ Pid ! {event} || {Path, Pid} <-
                            ets:lookup(clients, Id)].
-
-last_token(S) ->
-    lists:last(string:tokens(S, "/")).
