@@ -6,7 +6,7 @@ from subprocess import call
 conf = yaml.load(file("/etc/jellyfish.yml", "r"))
 
 def on_message(ws, message):
-    call(conf["command"])
+    call(conf["command"].split())
 
 def on_error(ws, error):
     print error
