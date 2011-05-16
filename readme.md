@@ -23,9 +23,8 @@ GitHub -(webhook) ->
 
 1. Generate a new identifier: `curl --data '' http://jlyfsh.com/deploy`
 2. Point your webhook at http://jlyfsh.com/deploy/{id}
-3. Install the Jellyfish cookbook: `knife cookbook site install jellyfish`
-4. Configure jellyfish::id attribute for your node.
-5. Converge!
+3. Install/configure the [Jellyfish cookbook](http://community.opscode.com/cookbooks/)
+4. Push to Converge!
 
 ## To Do
 
@@ -44,5 +43,5 @@ using it for my own projects so I may make a reasonable effort to keep
 it healthy, but absolutely no promises. It may go down for days,
 randomly destroy your data or vanish forever without notice.
 
-Sincerely,
+Sincerely, 
 Darrin
