@@ -1,9 +1,10 @@
+from subprocess import call
 import websocket
 import thread
 import time
 
 def on_message(ws, message):
-    print message
+    call(["uptime"])
 
 def on_error(ws, error):
     print error
