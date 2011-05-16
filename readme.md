@@ -9,7 +9,7 @@ converge.
 
 ## Design
 
-GitHub (webhook) ->
+GitHub -(webhook) ->
   jellyfish-server -(websocket)->
     jellyfish-clients -> chef-client
 
@@ -23,6 +23,10 @@ persistent WebSockets connection to your unique URI
 
 Generate a new identifier: `curl `
 
+## To Do
+
+* Package Erlang and Python programs using native techniques.
+
 ## Caveat emptor
 
 Please don't expect any of this to work well. This is practically the
@@ -30,11 +34,10 @@ first Erlang program I've ever written. I'm certain it lacks good
 style, design and is just wrong. I'd love to hear critical feedback to
 become a better Erlang hacker. Please send changes.
 
-I'll run this code as a community service at http://jlyfsh.com. It's
-running for my own projects so I may make a reasonable effort to keep
+I'll run this code as a community service at http://jlyfsh.com. I'm
+using it for my own projects so I may make a reasonable effort to keep
 it alive, but absolutely no promises. It may go down for days or
-vanish forever without notice. You may want to run your own server if
-this is something on which you rely.
+vanish forever without notice.
 
 Sincerely,
 Darrin
