@@ -1,7 +1,6 @@
-from subprocess import call
 import websocket
-import thread
-import time
+import yaml
+from subprocess import call
 
 def on_message(ws, message):
     call(["uptime"])
@@ -15,9 +14,12 @@ def on_close(ws):
 def on_open(ws):
     ws.send("open")
 
+def conf:
+    yaml.load(file("/etc/jellyfish.yml", "r"))
+
 if __name__ == "__main__":
     websocket.enableTrace(False)
-    ws = websocket.WebSocketApp("ws://localhost:8080/deploy/90ada634e59b775f4ff393d5631b1d3f",
+    ws = websocket.WebSocketApp("ws://localhost:8080/deploy/" + uuid,
                                 on_message = on_message,
                                 on_error = on_error,
                                 on_close = on_close)
