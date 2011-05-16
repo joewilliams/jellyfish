@@ -21,7 +21,11 @@ persistent WebSockets connection to your unique URI
 
 ## Installation
 
-Generate a new identifier: `curl `
+1. Generate a new identifier: `curl --data '' http://jlyfsh.com/deploy`
+2. Point your webhook at http://jlyfsh.com/deploy/{id}
+3. Install the Jellyfish cookbook: `knife cookbook site install jellyfish`
+4. Configure jellyfish::id attribute for your node.
+5. Converge!
 
 ## To Do
 
@@ -32,12 +36,12 @@ Generate a new identifier: `curl `
 Please don't expect any of this to work well. This is practically the
 first Erlang program I've ever written. I'm certain it lacks good
 style, design and is just wrong. I'd love to hear critical feedback to
-become a better Erlang hacker. Please send changes.
+become a better Erlang hacker. Pull requests welcome!
 
 I'll run this code as a community service at http://jlyfsh.com. I'm
 using it for my own projects so I may make a reasonable effort to keep
-it alive, but absolutely no promises. It may go down for days or
-vanish forever without notice.
+it healthy, but absolutely no promises. It may go down for days,
+randomly destroy your data or vanish forever without notice.
 
 Sincerely,
 Darrin
