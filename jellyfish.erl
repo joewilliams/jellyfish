@@ -7,7 +7,7 @@ start(Port) ->
                          {loop, fun(Req) -> route_rest(Req) end},
                          {ws_loop, fun(Ws) -> handle_websocket(Ws) end}]).
 
-stop() -> ets:delete(map),
+stop() -> ets:delete(clients),
           misultin:stop().
 
 route_rest(Req) ->
@@ -19,7 +19,8 @@ handle_r('POST', ["deploy"], Req) ->
     Req:ok([{"Content-Type", "text/plain"}], util:rand_hex(16));
 
 handle_r('GET', ["deploy", Id], Req) ->
-    Req:ok([{"Content-Type", "text/plain"}], "~s", [Id]);
+    signal(Id),
+    Req:ok([{"Content-Type", "text/plain"}], "OK");
 
 handle_r(_, _, Req) ->
     Req:ok([{"Content-Type", "text/plain"}], "Page not found.").
@@ -27,7 +28,8 @@ handle_r(_, _, Req) ->
 handle_websocket(Ws) ->
     receive
         {browser, Data} ->
-            ets:insert(clients, { Ws:get(path), self() }),
+            ets:insert(clients, {last_token(Ws:get(path)),
+                                 self()}),
             handle_websocket(Ws);
         {event} ->
             Ws:send("event"),
@@ -35,3 +37,10 @@ handle_websocket(Ws) ->
         _Ignore ->
             handle_websocket(Ws)
     end.
+
+signal(Id) ->
+    [ Pid ! {event} || {Path, Pid} <-
+                           ets:lookup(clients, Id)].
+
+last_token(S) ->
+    lists:last(string:tokens(S, "/")).
