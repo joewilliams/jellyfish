@@ -2,12 +2,12 @@
 -export([start/1, stop/0]).
 
 start(Port) ->
-    ets:new(clients, [public,named_table,bag]),
+    dets:open_file(clients, [{type, bag}]),
     misultin:start_link([{port, Port},
                          {loop, fun(Req) -> route_rest(Req) end},
                          {ws_loop, fun(Ws) -> handle_websocket(Ws) end}]).
 
-stop() -> ets:delete(clients),
+stop() -> dets:close(clients),
           misultin:stop().
 
 route_rest(Req) ->
@@ -28,8 +28,8 @@ handle_r(_, _, Req) ->
 handle_websocket(Ws) ->
     receive
         {browser, Data} ->
-            ets:insert(clients, {util:last_token(Ws:get(path)),
-                                 self()}),
+            dets:insert(clients, {util:last_token(Ws:get(path)),
+                                  self()}),
             handle_websocket(Ws);
         {event} ->
             Ws:send("event"),
@@ -40,4 +40,4 @@ handle_websocket(Ws) ->
 
 signal(Id) ->
     [ Pid ! {event} || {Path, Pid} <-
-                           ets:lookup(clients, Id)].
+                           dets:lookup(clients, Id)].
