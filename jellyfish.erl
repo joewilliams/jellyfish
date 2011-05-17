@@ -18,6 +18,10 @@ handle_r('GET', [], Req) -> Req:file("index.html");
 handle_r('POST', ["deploy"], Req) ->
     Req:ok([{"Content-Type", "text/plain"}], util:rand_hex(16));
 
+handle_r('POST', ["deploy", Id], Req) ->
+    signal(Id),
+    Req:ok([{"Content-Type", "text/plain"}], "OK");
+
 handle_r('GET', ["deploy", Id], Req) ->
     signal(Id),
     Req:ok([{"Content-Type", "text/plain"}], "OK");
