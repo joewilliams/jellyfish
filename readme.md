@@ -23,7 +23,7 @@ GitHub -(webhook) ->
 
 1. Generate a new identifier: `curl --data '' http://jlyfsh.com/deploy`
 2. Point your webhook at http://jlyfsh.com/deploy/{id}
-3. Install/configure the [Jellyfish cookbook](http://community.opscode.com/cookbooks/)
+3. Install/configure the [Jellyfish cookbook](http://community.opscode.com/cookbooks/jellyfish)
 4. Push to Converge!
 
 ## To Do
