@@ -43,5 +43,6 @@ using it for my own projects so I may make a reasonable effort to keep
 it healthy, but absolutely no promises. It may go down for days,
 randomly destroy your data or vanish forever without notice.
 
-Sincerely, 
+Sincerely,
+
 Darrin
