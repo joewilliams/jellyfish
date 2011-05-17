@@ -33,10 +33,10 @@ GitHub -(webhook) ->
 
 ## Caveat emptor
 
-Please don't expect any of this to work well. This is practically the
-first Erlang program I've ever written. I'm certain it lacks good
-style, design and is just wrong. I'd love to hear critical feedback to
-become a better Erlang hacker. Pull requests welcome!
+Please don't expect this to work well. It's practically the first
+Erlang program I've ever written. I'm certain it lacks good style,
+design and is just wrong. I'd love to hear critical feedback to become
+a better Erlang hacker. Pull requests welcome!
 
 I'll run this code as a community service at http://jlyfsh.com. I'm
 using it for my own projects so I may make a reasonable effort to keep
