@@ -43,5 +43,5 @@ handle_websocket(Ws) ->
     end.
 
 signal(Id) ->
-    [ Pid ! {event} || {Path, Pid} <-
+    [ Pid ! {event} || {_, Pid} <-
                            dets:lookup(clients, Id)].
