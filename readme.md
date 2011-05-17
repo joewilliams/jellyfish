@@ -28,7 +28,7 @@ GitHub -(webhook) ->
 
 ## To Do
 
-* Learn how to package, install and demonize Erlang and Python
+* Learn how to package, install and daemonize Erlang and Python
   programs using native techniques
 
 ## Caveat emptor
